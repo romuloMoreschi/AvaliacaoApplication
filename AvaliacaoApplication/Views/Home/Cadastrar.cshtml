@@ -1,0 +1,116 @@
+﻿@model AvaliacaoApplication.Models.Equipamento
+
+@{
+    ViewData["Title"] = "EQUIPAMENTO - CADASTRAR";
+}
+<br />
+<h6>@ViewData["Title"]</h6>
+<br />
+@if (TempData["MSG_S"] != null)
+{
+    <br />
+    <p class="alert alert-success">@TempData["MSG_S"]</p>
+
+}
+else if (TempData["MSG_D"] != null)
+{
+    <br />
+    <p class="alert alert-danger">@TempData["MSG_D"]</p>
+}
+
+<form asp-action="Cadastrar" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label asp-for="Nome" class="control-label"></label>
+        </div>
+        <div class="col-sm-5">
+            <input asp-for="Nome" class="form-control" />
+            <span asp-validation-for="Nome" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label asp-for="Id" class="control-label"></label>
+        </div>
+        <div class="col-sm-5">
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label asp-for="EstadoOrigem" class="control-label"></label>
+        </div>
+        <div class="col-sm-5">
+            <input asp-for="EstadoOrigem" class="form-control" />
+            <span asp-validation-for="EstadoOrigem" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label asp-for="EstadoDestino" class="control-label"></label>
+        </div>
+        <div class="col-sm-5">
+            <input asp-for="EstadoDestino" class="form-control" />
+            <span asp-validation-for="EstadoDestino" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label for="staticEmail">Sentido da via</label>
+        </div>
+        <div class="col-sm-5">
+            <div class="form-check form-check-inline ">
+                <input class="form-check-input" asp-for="SentidoVia" type="radio" value="0">
+                <label class="form-check-label" asp-for="SentidoVia">Entrada</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" asp-for="SentidoVia" type="radio" value="1">
+                <label class="form-check-label" asp-for="SentidoVia">Saida</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label for="staticEmail">Sentido da Leitura</label>
+        </div>
+        <div class="col-sm-5">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" asp-for="SentidoLeitura" type="radio" value="0">
+                <label class="form-check-label" asp-for="SentidoLeitura">Entrada na UF</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" asp-for="SentidoLeitura" type="radio" value="1">
+                <label class="form-check-label" asp-for="SentidoLeitura">Saida na UF</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" asp-for="SentidoLeitura" type="radio" value="2">
+                <label class="form-check-label" asp-for="SentidoLeitura">Indeterminado</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-sm-3 text-right">
+            <label for="staticEmail">Situacao</label>
+        </div>
+        <div class="col-sm-5">
+            @Html.DropDownListFor(model => model.Situacao, new SelectList(new[] {
+           new { Value = "true", Text = "Ativo" },
+           new { Value = "false", Text = "Cancelado" }, }, "Value", "Text", Model), new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row mb-3 ">
+        <div class="col-sm-3 text-right"></div>
+        <div class="col-sm-5">
+            <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            <a class="btn btn-primary" asp-action="Index">Voltar</a>
+        </div>
+    </div>
+</form>

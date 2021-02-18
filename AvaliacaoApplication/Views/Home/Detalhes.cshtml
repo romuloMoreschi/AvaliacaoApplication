@@ -1,0 +1,38 @@
+﻿@model AvaliacaoApplication.Models.Equipamento
+
+@{
+    ViewData["Title"] = "EQUIPAMENTO - DETALHES";
+}
+<br />
+<h6>@ViewData["Title"]</h6>
+<br />
+
+<div>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th scope="col">@Html.DisplayNameFor(model => model.Id)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Nome)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.EstadoOrigem)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.EstadoDestino)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.SentidoVia)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.SentidoLeitura)</th>
+                <th scope="col">@Html.DisplayNameFor(model => model.Situacao)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Id)</td>
+                <td>@Html.DisplayFor(model => model.Nome)</td>
+                <td>@Html.DisplayFor(model => model.EstadoOrigem)</td>
+                <td>@Html.DisplayFor(model => model.EstadoDestino)</td>
+                <td>@Html.DisplayFor(model => model.SentidoVia)</td>
+                <td>@Html.DisplayFor(model => model.SentidoLeitura)</td>
+                <td>@Html.DisplayFor(model => model.Situacao)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary">Voltar para a listagem</a>
+</div>
