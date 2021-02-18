@@ -27,14 +27,24 @@ namespace AvaliacaoApplication.Repository
             throw new System.NotImplementedException();
         }
 
-        public void Cadastrar(Equipamento equipamento)
+        public async Task<bool> CadastrarAsync(Equipamento equipamento)
         {
-            throw new System.NotImplementedException();
+            HttpResponseMessage Res = await Initialize().PostAsJsonAsync("api/Equipamentos", equipamento);
+            if (Res.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public void Excluir(int Id)
+        public async Task<bool> ExcluirAsync(int id)
         {
-            throw new System.NotImplementedException();
+            HttpResponseMessage Res = await Initialize().DeleteAsync($"api/Equipamentos/{id}");
+            if (Res.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<Equipamento> ObterEquipamentoAsync(int id)
@@ -49,9 +59,18 @@ namespace AvaliacaoApplication.Repository
             return EquipInfo;
         }
 
-        public ICollection<Equipamento> ObterTodosEquipamentos()
+        public async Task<ICollection<Equipamento>> ObterTodosEquipamentosAsync()
         {
-            throw new System.NotImplementedException();
+            List<Equipamento> EquipInfo = new List<Equipamento>();
+
+            HttpResponseMessage Res = await Initialize().GetAsync("api/Equipamentos");
+            if (Res.IsSuccessStatusCode)
+            {
+                var EmpResponse = Res.Content.ReadAsStringAsync().Result;
+                EquipInfo = JsonConvert.DeserializeObject<List<Equipamento>>(EmpResponse);
+            }
+
+            return EquipInfo;
         }
     }
 }

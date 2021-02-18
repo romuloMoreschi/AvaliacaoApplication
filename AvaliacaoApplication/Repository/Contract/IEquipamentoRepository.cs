@@ -6,10 +6,10 @@ namespace AvaliacaoApplication.Repository.Contract
 {
     public interface IEquipamentoRepository
     {
-        void Cadastrar(Equipamento equipamento);
+        Task<bool> CadastrarAsync(Equipamento equipamento);
         void Atualizar(Equipamento equipamento);
-        void Excluir(int Id);
+        Task<bool> ExcluirAsync(int Id);
         Task<Equipamento> ObterEquipamentoAsync(int Id);
-        ICollection<Equipamento> ObterTodosEquipamentos();
+        Task<ICollection<Equipamento>> ObterTodosEquipamentosAsync();
     }
 }
