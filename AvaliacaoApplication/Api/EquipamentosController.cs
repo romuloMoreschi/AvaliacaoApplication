@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AvaliacaoApi.DataBase;
 using AvaliacaoApplication.Models;
+using AvaliacaoApplication.Repository.Contract;
 
 namespace AvaliacaoApplication.Api
 {
@@ -25,14 +24,14 @@ namespace AvaliacaoApplication.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Equipamento>>> GetProduto()
         {
-            return await _context.Produto.ToListAsync();
+            return await _context.Equipamentos.ToListAsync();
         }
 
         // GET: api/Equipamentos/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Equipamento>> GetEquipamento(int id)
         {
-            var equipamento = await _context.Produto.FindAsync(id);
+            var equipamento = await _context.Equipamentos.FindAsync(id);
 
             if (equipamento == null)
             {
@@ -78,7 +77,7 @@ namespace AvaliacaoApplication.Api
         [HttpPost]
         public async Task<ActionResult<Equipamento>> PostEquipamento(Equipamento equipamento)
         {
-            _context.Produto.Add(equipamento);
+            _context.Equipamentos.Add(equipamento);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetEquipamento", new { id = equipamento.Id }, equipamento);
@@ -88,13 +87,13 @@ namespace AvaliacaoApplication.Api
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEquipamento(int id)
         {
-            var equipamento = await _context.Produto.FindAsync(id);
+            var equipamento = await _context.Equipamentos.FindAsync(id);
             if (equipamento == null)
             {
                 return NotFound();
             }
 
-            _context.Produto.Remove(equipamento);
+            _context.Equipamentos.Remove(equipamento);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +101,7 @@ namespace AvaliacaoApplication.Api
 
         private bool EquipamentoExists(int id)
         {
-            return _context.Produto.Any(e => e.Id == id);
+            return _context.Equipamentos.Any(e => e.Id == id);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace AvaliacaoApi.DataBase
         {
 
         }
-        public DbSet<Equipamento> Produto { get; set; }
+        public DbSet<Equipamento> Equipamentos { get; set; }
+        public DbSet<Estado> Estados { get; set; }
     }
 }

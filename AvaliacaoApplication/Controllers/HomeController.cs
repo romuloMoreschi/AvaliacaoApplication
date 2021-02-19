@@ -2,19 +2,23 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AvaliacaoApplication.Repository.Contract;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AvaliacaoApplication.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IEquipamentoRepository _equipamentRepository;
+        private readonly IEstadosRepository _estadosRepository;
 
-        public HomeController(IEquipamentoRepository equipamentRepository)
+        public HomeController(IEquipamentoRepository equipamentRepository, IEstadosRepository estadosRepository)
         {
             _equipamentRepository = equipamentRepository;
+            _estadosRepository = estadosRepository;
         }
-        public IActionResult Cadastrar()
+        public async Task<IActionResult> CadastrarAsync()
         {
+            ViewBag.Estados = new SelectList(await _estadosRepository.ObterTodosEstadosAsync(), "Id", "Nome");
             return View();
         }
         public async Task<IActionResult> DetalhesAsync(int id)
@@ -28,12 +32,18 @@ namespace AvaliacaoApplication.Controllers
         }
         public async Task<IActionResult> Index()
         {
+
             return View(await _equipamentRepository.ObterTodosEquipamentosAsync());
         }
 
         [HttpPost]
         public async Task<IActionResult> CadastrarAsync(Equipamento equipamento)
         {
+            equipamento.EstadoOrigem = equipamento.EstadoOrigemId.ToString();
+            equipamento.EstadoDestino = equipamento.EstadoDestinoId.ToString();
+
+            ViewBag.Estados = new SelectList(await _estadosRepository.ObterTodosEstadosAsync(), "Id", "Nome");
+
             if (await _equipamentRepository.CadastrarAsync(equipamento))
             {
                 TempData["MSG_S"] = "Registro salvo com sucesso!";

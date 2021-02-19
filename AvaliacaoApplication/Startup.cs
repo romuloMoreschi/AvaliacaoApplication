@@ -24,6 +24,7 @@ namespace AvaliacaoApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IEquipamentoRepository, EquipamentoRepository>();
+            services.AddScoped<IEstadosRepository, EstadoRepository>();
 
             services.AddDbContext<AvaliacaoContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
