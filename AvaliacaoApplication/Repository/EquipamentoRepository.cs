@@ -24,9 +24,14 @@ namespace AvaliacaoApplication.Repository
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             return client;
         }
-        public void Atualizar(Equipamento equipamento)
+        public async Task<bool> AtualizarAsync(Equipamento equipamento, int id)
         {
-            throw new System.NotImplementedException();
+            HttpResponseMessage Res = await Initialize().PutAsJsonAsync($"api/Equipamentos/{id}", equipamento);
+            if (Res.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            return false;
         }
 
         public async Task<bool> CadastrarAsync(Equipamento equipamento)

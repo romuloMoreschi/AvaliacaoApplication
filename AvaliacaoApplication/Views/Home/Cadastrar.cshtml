@@ -48,7 +48,7 @@ else if (TempData["MSG_D"] != null)
             <label asp-for="EstadoOrigem" class="control-label"></label>
         </div>
         <div class="col-sm-5">
-            @Html.DropDownListFor(model => model.EstadoOrigemId, @ViewBag.Estados as SelectList,
+            @Html.DropDownListFor(model => model.EstadoOrigem, @ViewBag.Estados as SelectList,
              "Selecione o estado", new { @class = "form-control" })
         </div>
     </div>
@@ -58,9 +58,8 @@ else if (TempData["MSG_D"] != null)
             <label asp-for="EstadoDestino" class="control-label"></label>
         </div>
         <div class="col-sm-5">
-            @Html.DropDownListFor(model => model.EstadoDestinoId, @ViewBag.Estados as SelectList,
+            @Html.DropDownListFor(model => model.EstadoDestino, @ViewBag.Estados as SelectList,
              "Selecione o estado", new { @class = "form-control" })
-            <span asp-validation-for="EstadoDestino" class="text-danger"></span>
         </div>
     </div>
 

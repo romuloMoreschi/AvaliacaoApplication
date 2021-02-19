@@ -18,7 +18,7 @@ else if (TempData["MSG_D"] != null)
     <p class="alert alert-danger">@TempData["MSG_D"]</p>
 }
 
-<form asp-action="Atualizar" enctype="multipart/form-data">
+<form asp-action="Editar" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="row mb-3">
@@ -46,8 +46,8 @@ else if (TempData["MSG_D"] != null)
             <label asp-for="EstadoOrigem" class="control-label"></label>
         </div>
         <div class="col-sm-5">
-            <input asp-for="EstadoOrigem" class="form-control" />
-            <span asp-validation-for="EstadoOrigem" class="text-danger"></span>
+            @Html.DropDownListFor(model => model.EstadoOrigem, @ViewBag.Estados as SelectList,
+            "Selecione o estado", new { @class = "form-control" })
         </div>
     </div>
 
@@ -56,8 +56,8 @@ else if (TempData["MSG_D"] != null)
             <label asp-for="EstadoDestino" class="control-label"></label>
         </div>
         <div class="col-sm-5">
-            <input asp-for="EstadoDestino" class="form-control" />
-            <span asp-validation-for="EstadoDestino" class="text-danger"></span>
+            @Html.DropDownListFor(model => model.EstadoDestino, @ViewBag.Estados as SelectList,
+            "Selecione o estado", new { @class = "form-control" })
         </div>
     </div>
 

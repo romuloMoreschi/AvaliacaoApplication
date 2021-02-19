@@ -2,8 +2,8 @@
 {
     public enum SentidoLeitura
     {
-        EntradaNaUf = 0,
-        SaidaNaUf = 1,
+        EntradaNaUF = 0,
+        SaidaNaUF = 1,
         Indeterminado = 2
     }
 }
